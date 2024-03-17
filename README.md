@@ -3,7 +3,7 @@
 ## About
 This project is intended to assist with compiling and visualizing data published in connection with the train derailment in East Palestine, OH on February 3, 2023
 
-The first part of this project, contained in the file **data_reader.py**, uses the Tabula-Py library and python to pull data about sampling data off Eurofins lab reports compiled for Norfolk Southern and its contractor, Arcadis.
+The first part of this project, contained in the file **data_reader.py**, uses the Tabula-Py library and python to pull sampling data from Eurofins lab reports compiled for Norfolk Southern and its contractor, Arcadis.
 
 ## Data Source
 Eventually, I plan to include multiple sources and additional visualizations. Currently the input sources include:
