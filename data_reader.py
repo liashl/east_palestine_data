@@ -65,12 +65,18 @@ QUALIFIERS = [
     'HF',
     '*-',
     'I',
-    '*3'
+    '*3',
+    '^+',
+    'E'
 ]
+
+#filename_to_use = 'norfolk_southern_data.csv'
+#filename_to_use = 'test.csv'
+filename_to_use = 'norfolk_southern_data_3.csv'
 
 #write column headers to top of CSV.
 #can float this after the first file is complete, in order to append data from second file.
-with open('norfolk_southern_data.csv','w',newline='') as f:
+with open(filename_to_use,'w',newline='') as f:
     w = csv.writer(f)
     w.writerow(column_names)
 
@@ -721,9 +727,10 @@ def scrape_eurofins_pdf(path,pagenums):
                     #print(values_dict)
 
                     if ((values_dict['method'] != 'General Chemistry') and (values_dict['method'] != 'Part Size Red - Particle Size Reduction Preparation')):
+                        values_dict['analyte'] = values_dict['analyte'].strip()
                         print(values_dict)
                         #write to CSV
-                        with open('norfolk_southern_data.csv','a',newline='') as f:
+                        with open(filename_to_use,'a',newline='') as f:
                             w = csv.writer(f)
                             w.writerow(values_dict.values())
                         pass
@@ -746,6 +753,6 @@ def scrape_eurofins_pdf(path,pagenums):
     #strip_datetime(test_list)
             
 #call function
-test_pages = '1-16'
+#test_pages = '1401'
 scrape_eurofins_pdf(path_1,pages_1)
 scrape_eurofins_pdf(path_2,pages_2)
