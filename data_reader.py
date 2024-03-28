@@ -6,6 +6,8 @@ from datetime import datetime
 import unicodedata
 import csv
 from datetime import datetime
+import os.path
+from pandas.errors import EmptyDataError
 
 #check if an element is recognizable as datetime in the format mm/dd/yy
 def is_date_1(date_string):
@@ -35,20 +37,38 @@ def strip_date_headers(input_list):
     new_input_list = [x for x in input_list if not (x in date_words)]
     return(new_input_list)
 
-#prepare to write to CSV
-column_names = [
-    'client_sample_id',
-    'sample_date',
-    'matrix',
-    'method',
-    'analyte',
-    'result',
-    'qualifier',
-    'RL',
-    'MDL',
-    'unit',
-    'dil fac',
-    'EDL']
+def check_for_headers(filename, rows=10, threshold=0.9):
+    #check to see if file exists 
+    if (os.path.isfile(filename)):
+        #if file exists, check to see if it is a .csv file
+        ext = os.path.splitext(filename)[1].lower()
+        if ext == '.csv':
+            try:
+                assume_header = pd.read_csv(filename, header='infer',nrows=rows)
+                assume_noheader = pd.read_csv(filename, header=None, nrows=rows)
+
+                #check similarity of data types
+                #from stackoverflow: https://stackoverflow.com/questions/40193388/how-to-check-if-a-csv-has-a-header-using-python
+                similarity = (assume_header.dtypes.values == assume_noheader.dtypes.values).mean()
+
+                #if similarity is lower than threshold, assume headers are present
+                if similarity < threshold:
+                    return True
+                #else if similarity is higher than threshold, assume no headers
+                else:
+                    return False
+
+            except EmptyDataError as e:
+                return False
+                
+        #if file exists but is not a csv, return None
+        else:
+            return None
+
+    #if file does not exist, return False
+    else:
+        return False
+
 
 QUALIFIERS = [
     '*+',
@@ -71,18 +91,16 @@ QUALIFIERS = [
 ]
 
 #filename_to_use = 'norfolk_southern_data.csv'
-#filename_to_use = 'test.csv'
-filename_to_use = 'norfolk_southern_data_3.csv'
+filename_to_use = 'test.csv'
+#filename_to_use = 'norfolk_southern_data_3.csv'
 
-#write column headers to top of CSV.
-#can float this after the first file is complete, in order to append data from second file.
-with open(filename_to_use,'w',newline='') as f:
-    w = csv.writer(f)
-    w.writerow(column_names)
+
 
 #paths to two pdf files containing data
 path_1 = "media/NS_East Palestine IRR_WMP_4.10.2023_Vol 2-508.pdf"
 path_2 = "media/NS_East Palestine IRR_WMP_4.10.2023_Vol 3-508 (1).pdf"
+path_3 = "media/NS_East Palestine IRR_WMP_4.18.2023_Vol 1-508_0.pdf"
+#online location for path_3 (Waste Management Plan Volume 1) = "https://www.epa.gov/system/files/documents/2023-06/NS_East%20Palestine%20IRR_WMP_4.18.2023_Vol%201-508.pdf"
 
 #page numbers for path_1
 #These are all the pages containing Client Sample Data not explicitly marked "TRIP BLANK"
@@ -95,9 +113,46 @@ pages_1 = '17-62,118,140-155,192-237,298,322-367,421,456-544,628,649-660,710-778
 pages_2 = '1-16,82-87,116-129,157-178,217-230,262-287,324-339,369-372,401-420,456'
 #pages 1-16,82-87,116-129,157-178,217-230,262-287,324-339,369-372,401-420,456
 
+
+
+
+
+#Waste Transport and disposal logs
+pages_5 = '308-387,388-420'
+
 #function for writing data from Eurofins PDF provided by EPA/Arcadis/Norfolk Southern
 #this appends data, it does not overwrite
-def scrape_eurofins_pdf(path,pagenums):
+def scrape_eurofins_pdf(path,pagenums,outfile):
+
+    #prepare to write to CSV
+    column_names = [
+        'client_sample_id',
+        'sample_date',
+        'matrix',
+        'method',
+        'analyte',
+        'result',
+        'qualifier',
+        'RL',
+        'MDL',
+        'unit',
+        'dil fac',
+        'EDL']
+
+    #write column headers to top of CSV.
+    #can float this after the first file is complete, in order to append data from second file.
+
+    header_check = check_for_headers(outfile)
+
+    if header_check == None: 
+        return -1
+    else:
+
+        #if headers are not present, write them to the file
+        if header_check == False:
+            with open(outfile,'a',newline='') as f:
+                w = csv.writer(f)
+                w.writerow(column_names)
 
     #call Tabula-Py and read multiple tables into a list of dataframes using multiple tables setting
     #Set area based on where tables were located on the PDF.
@@ -730,7 +785,7 @@ def scrape_eurofins_pdf(path,pagenums):
                         values_dict['analyte'] = values_dict['analyte'].strip()
                         print(values_dict)
                         #write to CSV
-                        with open(filename_to_use,'a',newline='') as f:
+                        with open(outfile,'a',newline='') as f:
                             w = csv.writer(f)
                             w.writerow(values_dict.values())
                         pass
@@ -753,6 +808,146 @@ def scrape_eurofins_pdf(path,pagenums):
     #strip_datetime(test_list)
             
 #call function
-#test_pages = '1401'
-scrape_eurofins_pdf(path_1,pages_1)
-scrape_eurofins_pdf(path_2,pages_2)
+#scrape_eurofins_pdf(path_1,pages_1,'norfolk_southern_data.csv')
+#scrape_eurofins_pdf(path_2,pages_2,'norfolk_southern_data.csv')
+
+#print('testing')
+#scrape_eurofins_pdf(path_2,'16','test.csv')
+#scrape_eurofins_pdf(path_2,'16','test.csv')
+
+
+#print('README.md:',check_for_headers('README.md'))
+#print('test_2.csv:',check_for_headers('test_2.csv'))
+#print('test.csv:',check_for_headers('test.csv'))
+#print('norfolk_southern_data_3.csv:',check_for_headers('norfolk_southern_data_3.csv'))
+            
+def scrape_frac_inventory(outfile,path=path_3):
+
+    #Frac tank inventory
+    frac_pages='296-298'
+
+    frac_headers = [
+        'Number',
+        'Container_ID',
+        'Updated',
+        'Notes',
+        'Staging Site',
+        'Size',
+        'DTW_ft',
+        'TD_ft',
+        'Capacity2',
+        'percent',
+        'DROPTHIS'
+    ]
+
+    #use tabula-py to extract the table
+    frac_dfs = tabula.read_pdf(path_3, pages=frac_pages, area=[[63.8775, 17.2125, 734.0175, 591.7275]], guess=True, multiple_tables=True,pandas_options={'header':None})
+
+    #drop the last row, which is totals and al ittle out of place
+    frac_dfs[2].drop(frac_dfs[2].tail(1).index,inplace=True)
+
+    #for my use when debugging
+    #pd.set_option('display.max_columns', None)
+    #for table in frac_dfs:
+    #    print(table.shape)
+
+    newtable = pd.concat(frac_dfs,ignore_index=True)
+    newtable.columns=frac_headers
+    newtable.drop(columns=['DROPTHIS'],inplace=True)
+    print(newtable)
+    newtable.to_csv(outfile, index=False)
+
+#call frac_invemntory scraping function
+#scrape_frac_inventory('frac_inventory.csv')
+
+def scrape_rollaway_inventory(outfile,path=path_3):
+
+    #Roll-off inventory
+    roll_pages='300-302'
+
+    roll_df = tabula.read_pdf(path,pages=roll_pages,area =[[53.1675, 49.725, 738.6075, 554.625]],stream=True,multiple_tables=True)
+    print(len(roll_df))
+    non_null_index = 0
+    null_count = 0
+
+    for table in roll_df[0:1]:
+        pd.set_option('display.max_columns',None)
+        #print(table.head(50))
+
+        #need to group by -- if a cell is null, the rows directly above and below it
+        for index, row in table.iterrows():
+            if pd.isnull(row['No.']):
+                null_count+=1
+                if null_count == 1:
+                    non_null_index = index
+                elif null_count == 2:
+                    non_null_index = index-2
+
+                    null_count = 0
+            else:
+                if null_count >0:
+                    non_null_index = index-1
+                else:
+                    non_null_index=index
+
+            table.loc[index, 'non_null_index'] = non_null_index
+
+        def clean_column(old_name,new_name,table=table):
+            table[old_name] = table[old_name].fillna('').astype(str)
+            new_column = table['non_null_index',old_name].groupby(['non_null_index'])[old_name].apply(' '.join).reset_index().rename(columns={old_name:new_name})
+            new_column[new_name]=new_column[new_name].str.strip()
+            #table = table.merge(new_name, on='non_null_index')
+
+        clean_column('Container ID','Container_ID')
+
+        #table['Container ID'] = table['Container ID'].fillna('').astype(str)
+        table['Staging Site'] = table['Staging Site'].fillna('').astype('str')
+        table['Waste Profile Name'] = table['Waste Profile Name'].fillna('').astype('str')
+        table['Waste Description Notes'] = table['Waste Description Notes'].fillna('').astype('str')
+
+        #cont_id = table[['non_null_index', 'Container ID']].groupby(['non_null_index'])['Container ID'].apply(' '.join).reset_index().rename(columns={'Container ID': 'Container_ID'})
+        #cont_id['Container_ID'] = cont_id['Container_ID'].str.strip()
+
+        staging = table[['non_null_index','Staging Site']].groupby(['non_null_index'])['Staging Site'].apply(' '.join).reset_index().rename(columns={'Staging Site': 'Staging_Site'})
+        staging['Staging_Site'] = staging['Staging_Site'].str.strip()
+
+        waste_profile = table[['non_null_index','Waste Profile Name']].groupby(['non_null_index'])['Waste Profile Name'].apply(' '.join).reset_index().rename(columns={'Waste Profile Name': 'Waste_Profile'})
+        waste_profile['Waste_Profile'] = waste_profile['Waste_Profile'].str.strip()
+
+        description = table[['non_null_index','Waste Description Notes']].groupby(['non_null_index'])['Waste Description Notes'].apply(' '.join).reset_index().rename(columns={'Waste Description Notes': 'Description_Notes'})
+        description['Description_Notes']=description['Description_Notes'].str.strip()
+
+        #table = table.merge(cont_id,on='non_null_index')
+        table = table.merge(staging,on='non_null_index')
+        table = table.merge(waste_profile,on='non_null_index')
+        table = table.merge(description,on='non_null_index')
+
+        table = table.drop(columns=['No.','Container ID','Staging Site','Status','Waste Profile Name','Waste Description Notes','Unnamed: 0','Last Date Inspected']).drop_duplicates()
+
+        print(table)
+
+
+    """
+        #create column and set to current index
+        #table.loc
+        #for each row:
+        for index, row in table.iterrows():
+            if pd.notna(row['No.']):
+                non_null_index = index
+            #add current non_null_index value to dataframe
+            table.loc[index, 'non_null_index'] = non_null_index
+
+                
+            #print(row['No.'],pd.notna(row['No.']),non_null_index)
+            #save index of most recent non-null row
+            #if value in column 'No.' is null, combine non null values in all cells with previous row's values.
+        pd.set_option('display.max_columns',None)
+        print(table.head(20))
+
+        #table = table.groupby('non_null_index').transform(lambda x: ''.join(str(x)) if np.all(pd.notna(x)) else x)
+        #table = table[table['No.'].notna()]
+
+
+        #print(table.head(5))
+    """
+scrape_rollaway_inventory('test.csv')
