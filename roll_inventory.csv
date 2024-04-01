@@ -1,0 +1,199 @@
+Roll_Index,Container_ID,Staging_Site,Waste_Profile,Description_Notes
+0.0,SB2593,Ceramics Parking Lot,Street Sweepings,Dirt and Street Sweepings
+1.0,RT5046,North Track/State Line  Warehouse,N/A - EMPTY,-- CLEAN
+4.0,RT5282,South Track near HEPCO,Municipal Trash,Municipal Trash
+5.0,RT1588A,Taggart Near Truck  Wash/Parking Lot,Street Sweepings,Street Sweepings
+8.0,SB1450,Tank Farm 5,Debris,Impacted Absorbents &  Debris (Booms & pads)
+11.0,SB1905,Tank Farm 5,Debris,Booms & Pads
+12.0,SB1028,Tank Farm 5,Debris,Insulation
+13.0,SB2446,Tank Farm 5,Debris,Booms & Pads
+14.0,SB1167,Tank Farm 5,Debris,PPE & Absorbents
+15.0,SB2412,Tank Farm 5,Debris,Absorbents & Debris +  municipal trash
+18.0,SB1395,Tank Farm 5,Debris,Municipal trash and dirt
+19.0,SB2665,Tank Farm 5,Debris,Municipal trash and  corrugated tubing
+22.0,SB2462,Tank Farm 5,Debris,Absorbants and Dirt
+23.0,SB2367,Tank Farm 5,Debris,Booms & Pads
+24.0,SB2521,Tank Farm 5,Debris,Municipal Trash and dirt
+25.0,SB1833,Tank Farm 5,Debris,Absorbents & Municipal Trash
+26.0,RT2281,Tank Farm 5,Debris,"Street-sweeping Debris, Trash LARGE QUANTITY OF  and large quanities of water LIQUID"
+29.0,SB2445,Tank Farm 5,Debris,"Dirt, Plastic and Ballast"
+30.0,SB1521,Tank Farm 5,Debris,Booms and Pads
+31.0,SB2626,Tank Farm 5,Debris,Absorbents & Debris
+32.0,SB1962,Tank Farm 5,Debris,Absorbants and Municipal  Trash
+35.0,SB1860,Tank Farm 5,Debris,Wood debris and flour bags
+36.0,SB1055,Tank Farm 5,Debris,Hay and Dirt
+37.0,SB2536,Tank Farm 5,Debris,Municipal Trash
+38.0,SB2500,Tank Farm 5,Debris,Absorbants
+39.0,RT1783,Tank Farm 5,Debris,Metal Fencing and Dirt
+40.0,RT3244,Tank Farm 5,Debris,Secondary conainment
+41.0,RT4726,Tank Farm 5,Debris,"Tires, Dirt, Fencing and Trees"
+42.0,RT4509,Tank Farm 5,Debris,"A LOT OF SEDIMENT AND Dirt, Trash, and water LARGE AMOUNT OF LIQUID"
+45.0,SB2454,Tank Farm 5,Debris,Insulation and Dirt
+46.0,RT5283,Tank Farm 5,Debris,Secondary Containment
+47.0,SB2354,Tank Farm 5,Debris,Wood & Metal sheets
+48.0,SB1847,Tank Farm 5,Debris,"Trash, booms + pads"
+49.0,SB2418,Tank Farm 5,Debris,Impacted Absorbents &  Debris
+52.0,SB1299,Tank Farm 5,Debris,Secondary conainment
+53.0,SB1263,Tank Farm 5,Debris,Municipal Trash
+54.0,SB1486,Tank Farm 5,Debris,Hay and Dirt
+55.0,SB2588,Tank Farm 5,Debris,Absorbants and PPE
+56.0,AJVB-225,Tank Farm 5,Ethyl Hexy Acrylate,Ethyl Hexyl Acrylate
+57.0,SB2406,Tank Farm 5,N/A - EMPTY,--
+58.0,VB1190,Tank Farm 5,N/A - EMPTY,--
+59.0,VB1281,Tank Farm 5,N/A - EMPTY,--
+60.0,SB2119,Tank Farm 5,N/A - EMPTY,--
+61.0,VB1110,Tank Farm 5,N/A - EMPTY,--
+62.0,SB1597,Tank Farm 5,N/A - EMPTY,--
+63.0,SB2116,Tank Farm 5,N/A - EMPTY,-- CLEAN
+64.0,SB1608,Tank Farm 5,N/A - EMPTY,-- CLEAN
+65.0,DVB1420,Tank Farm 5,N/A - EMPTY,--
+66.0,SB1226,Tank Farm 5,N/A - EMPTY,-- NEEDS CLEANING
+67.0,SB1621,Tank Farm 5,N/A - EMPTY,-- CLEAN
+68.0,RT3117,Tank Farm 5,N/A - EMPTY,-- CLEAN
+69.0,RT5362,Tank Farm 5,N/A - EMPTY,-- CLEAN
+70.0,RT5385,Tank Farm 5,"Non-Friable ACM, Debris  & soil","ACM, Debris & Soil"
+73.0,RT5417,Tank Farm 5,"Non-Friable ACM, Debris  & soil","ACM, Debris & Soil"
+76.0,RT5403,Tank Farm 5,"Non-Friable ACM, Debris  & soil","ACM, Debris & Soil"
+79.0,RT5390,Tank Farm 5,"Non-Friable ACM, Debris  & soil","ACM, Debris & Soil"
+82.0,RT5416,Tank Farm 5,"Non-Friable ACM, Debris  & soil","ACM, Debris & Soil"
+85.0,SB1085,Tank Farm 5,"Non-Friable ACM, Debris  & soil","ACM, Debris & Soil"
+88.0,RT5409,Tank Farm 5,"Non-Friable ACM, Debris  & soil",
+91.0,SB1968,Tank Farm 5,"Non-Friable ACM, Debris  & soil",
+94.0,RT5406,Tank Farm 5,"Non-Friable ACM, Debris  & soil",
+97.0,RT5414,Tank Farm 5,"Non-Friable ACM, Debris  & soil",
+100.0,RT5367,Tank Farm 5,"Non-Friable ACM, Debris  & soil",
+103.0,SB1056,Tank Farm 5,Plastic Pellets & Soil,
+104.0,SB2636,Tank Farm 5,Plastic Pellets & Soil,
+105.0,SB1841,Tank Farm 5,Plastic Pellets & Soil,
+106.0,SB1252,Tank Farm 5,Plastic Pellets & Soil,
+107.0,SB1855,Tank Farm 5,Plastic Pellets & Soil,
+108.0,SB2477,Tank Farm 5,Plastic Pellets & Soil,
+109.0,SB1465,Tank Farm 5,Plastic Pellets & Soil,
+110.0,SB1032,Tank Farm 5,Plastic Pellets & Soil,
+111.0,SB1850,Tank Farm 5,Plastic Pellets & Soil,
+112.0,SB1985,Tank Farm 5,Plastic Pellets & Soil,
+113.0,SB1707,Tank Farm 5,Plastic Pellets & Soil,
+114.0,SB1566,Tank Farm 5,Plastic Pellets & Soil,
+115.0,SB2461,Tank Farm 5,Plastic Pellets & Soil,
+116.0,SB1612,Tank Farm 5,Plastic Pellets & Soil,
+117.0,DSB2468,Tank Farm 5,Plastic Pellets & Soil,
+118.0,SB2325,Tank Farm 5,Plastic Pellets & Soil,
+119.0,SB2224,Tank Farm 5,Plastic Pellets & Soil,
+120.0,VB1328,Tank Farm 5,Plastic Pellets & Soil,
+121.0,279363,Tank Farm 5,Plastic Pellets & Soil,
+122.0,VB1319,Tank Farm 5,Plastic Pellets & Soil,
+123.0,VB1108,Tank Farm 5,Plastic Pellets & Soil,
+124.0,VB1344,Tank Farm 5,Plastic Pellets & Soil,
+125.0,VB1254,Tank Farm 5,Plastic Pellets & Soil,
+126.0,VB1402,Tank Farm 5,Plastic Pellets & Soil,
+127.0,VB1284,Tank Farm 5,Plastic Pellets & Soil,
+128.0,VB1403,Tank Farm 5,Plastic Pellets & Soil,
+129.0,SB1886,Tank Farm 5,Plastic Pellets & Soil,
+130.0,VB1337,Tank Farm 5,Plastic Pellets & Soil,
+131.0,VB1184,Tank Farm 5,Plastic Pellets & Soil,
+132.0,280784,Tank Farm 5,Plastic Pellets & Soil,
+133.0,DVB1321,Tank Farm 5,Plastic Pellets & Soil,
+134.0,279404,Tank Farm 5,Plastic Pellets & Soil,
+135.0,VB1350,Tank Farm 5,Plastic Pellets & Soil,
+136.0,VB1264,Tank Farm 5,Plastic Pellets & Soil,
+137.0,SB1505,Tank Farm 5,Plastic Pellets & Soil,
+138.0,SB1050,Tank Farm 5,Plastic Pellets & Soil,
+139.0,SB1340,Tank Farm 5,Plastic Pellets & Soil,
+140.0,DSB1811,Tank Farm 5,Plastic Pellets & Soil,
+141.0,SB1921,Tank Farm 5,Plastic Pellets and Soil,
+142.0,DSB1809,Tank Farm 5,Soil < LDR,
+143.0,SB1511,Tank Farm 5,Soil < LDR,
+146.0,SB2474,Tank Farm 5,Soil < LDR,
+147.0,SB1502,Tank Farm 5,Soil < LDR,
+148.0,SB2455,Tank Farm 5,Soil < LDR,
+149.0,SB1188,Tank Farm 5,Soil < LDR,
+150.0,SB2405,Tank Farm 5,Soil < LDR,
+151.0,SB2475,Tank Farm 5,Soil < LDR,
+152.0,SB1051,Tank Farm 5,Soil < LDR,
+153.0,SB1623,Tank Farm 5,Soil < LDR,
+154.0,SB1634,Tank Farm 5,Soil < LDR,
+155.0,SB1213,Tank Farm 5,Soil < LDR,
+156.0,SB1305,Tank Farm 5,Soil < LDR,
+157.0,SB1865,Tank Farm 5,Soil < LDR,
+158.0,SB2538,Tank Farm 5,Soil < LDR,
+159.0,SB2407,Tank Farm 5,Soil < LDR,
+160.0,SB2634,Tank Farm 5,Soil < LDR,
+161.0,SB1022,Tank Farm 5,Soil < LDR,
+162.0,SB2413,Tank Farm 5,Soil < LDR,
+163.0,AJMU112,Tank Farm 5,Soil < LDR,
+164.0,RT4635,Tank Farm 5,Soil < LDR,
+165.0,SB2621,Tank Farm 5,Soil < LDR,
+166.0,SB2598,Tank Farm 5,Soil < LDR,
+167.0,SB1618,Tank Farm 5,Soil < LDR,
+168.0,SB1721,Tank Farm 5,Soil < LDR,
+169.0,SB2655,Tank Farm 5,Soil < LDR,
+170.0,SB2056,Tank Farm 5,Soil < LDR,
+171.0,SB1692,Tank Farm 5,Soil < LDR,N Ditch Dirt
+172.0,SB1852,Tank Farm 5,Soil < LDR,N Ditch Dirt
+173.0,RT1587,Tank Farm 5,Soil < LDR,Ballast and Dirt
+174.0,SB2624,Tank Farm 5,Soil < LDR,N Ditch Dirt
+175.0,SB1798,Tank Farm 5,Soil < LDR,N Ditch Dirt
+176.0,SB2650,Tank Farm 5,Soil < LDR,N Ditch Dirt
+177.0,SB1799,Tank Farm 5,Soil < LDR,N Ditch Dirt
+178.0,SB1753,Tank Farm 5,Soil < LDR,Dirt
+179.0,SB2526,Tank Farm 5,Soil < LDR,Dirt
+180.0,SB2648,Tank Farm 5,Soil < LDR,Dirt
+181.0,SB1702,Tank Farm 5,Soil < LDR,Dirt and wood debris
+182.0,SB1046,Tank Farm 5,Soil < LDR,Dirt
+183.0,RT2614,Tank Farm 5,Soil < LDR,Contaminated Dirt
+184.0,RT4241,Tank Farm 5,Soil < LDR,"Dirt, Ballast and Debris"
+185.0,RT1597,Tank Farm 5,Soil < LDR,Dirt
+186.0,SB1504,Tank Farm 5,Soil < LDR,Dirt
+187.0,RB21203,Tank Farm 5,Soil < LDR,Contaminated Dirt
+188.0,RB2929,Tank Farm 5,Soil < LDR,Contaminated Dirt
+189.0,RT5026,Tank Farm 5,Soil < LDR,Contaminated Dirt
+190.0,RT4428,Tank Farm 5,Soil < LDR,Contaminated Dirt
+191.0,RT4533,Tank Farm 5,Soil < LDR,Contaminated Dirt
+192.0,RT5043,Tank Farm 5,Soil < LDR,Contaminated Dirt
+193.0,RT1605A,Tank Farm 5,Soil < LDR,Contaminated Dirt
+194.0,RT1658,Tank Farm 5,Soil < LDR,Contaminated Dirt
+195.0,RT2843,Tank Farm 5,Soil < LDR,Contaminated Dirt
+196.0,RT3114,Tank Farm 5,Soil < LDR,Contaminated Dirt
+197.0,RT2639,Tank Farm 5,Soil < LDR,Contaminated Dirt
+198.0,RT2636,Tank Farm 5,Soil < LDR,Contaminated Dirt
+199.0,RT4583,Tank Farm 5,Soil < LDR,Contaminated Dirt
+200.0,RT5284,Tank Farm 5,Soil < LDR,Contaminated Dirt
+201.0,RT2658,Tank Farm 5,Soil < LDR,Contaminated Dirt
+202.0,RT5049,Tank Farm 5,Soil < LDR,Contaminated Dirt
+203.0,RT4442,Tank Farm 5,Soil < LDR,Contaminated Dirt
+204.0,RT4216,Tank Farm 5,Soil < LDR,Contaminated Dirt
+205.0,RT3103,Tank Farm 5,Soil < LDR,Dirt
+206.0,RT4725,Tank Farm 5,Soil < LDR,Dirt
+207.0,RT4007,Tank Farm 5,Soil < LDR,Dirt
+208.0,RT1599,Tank Farm 5,Soil < LDR,Dirt
+209.0,RT4521,Tank Farm 5,Soil < LDR,Dirt
+210.0,RT4424,Tank Farm 5,Soil < LDR,Dirt
+211.0,SB1826,Tank Farm 5,Soil < LDR,Dirt
+212.0,RT4725,Tank Farm 5,Soil < LDR,Contaminated Dirt
+213.0,RT5358,Tank Farm 6,Debris,Absorbants and Dirt
+214.0,RT1608,Tank Farm 6,Debris,Hay and Absorbants
+215.0,RT4517,Tank Farm 6,N/A - EMPTY,--
+216.0,RT5396,Tank Farm 6,N/A - EMPTY,--
+217.0,RT5364,Tank Farm 6,N/A - EMPTY,--
+218.0,SB1946,Tank Farm 6,Soil < LDR,Dirt
+219.0,DSB1754,Tank Farm 6,Soil < LDR,Dirt
+220.0,SB2234,Tank Farm 6,Soil < LDR,Dirt
+221.0,SB1217,Tank Farm 6,Soil < LDR,Dirt
+222.0,SB2469,Tank Farm 6,Soil < LDR,Dirt
+223.0,RT1785,Tank Farm 6,Soil < LDR,Dirt
+224.0,RT5129,Tank Farm 6,Soil < LDR,Dirt
+225.0,SB1121,Tank Farm 6,Soil < LDR,Dirt
+226.0,RT4226,Tank Farm 6,Soil < LDR,Dirt
+227.0,RT3079,Tank Farm 6,Soil < LDR,Dirt
+228.0,RT624,Tank Farm 6,Soil < LDR,Dirt
+229.0,RT3454,Tank Farm 6,Soil < LDR,Dirt
+230.0,RT4414,Tank Farm 6,Soil < LDR,Dirt
+231.0,RT4228,Tank Farm 6,Soil < LDR,Dirt
+232.0,RT4534,Tank Farm 6,Soil < LDR,Dirt
+233.0,RT2291,Tank Farm 6,Soil < LDR,Dirt
+234.0,RT5379,Two Gallon Tank Area,N/A - EMPTY,--
+235.0,SB1509,Unknown Location,,--
+236.0,SB1112,Unknown Location,,--
+237.0,DSB1809,Unknown Location,,--
+238.0,DB1022,Unknown Location,,--
+239.0,RT4517,Unknown Location,,--

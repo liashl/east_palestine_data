@@ -808,8 +808,8 @@ def scrape_eurofins_pdf(path,pagenums,outfile):
     #strip_datetime(test_list)
             
 #call function
-#scrape_eurofins_pdf(path_1,pages_1,'norfolk_southern_data.csv')
-#scrape_eurofins_pdf(path_2,pages_2,'norfolk_southern_data.csv')
+scrape_eurofins_pdf(path_1,pages_1,'norfolk_southern_data.csv')
+scrape_eurofins_pdf(path_2,pages_2,'norfolk_southern_data.csv')
 
 #print('testing')
 #scrape_eurofins_pdf(path_2,'16','test.csv')
@@ -857,7 +857,7 @@ def scrape_frac_inventory(outfile,path=path_3):
     print(newtable)
     newtable.to_csv(outfile, index=False)
 
-#call frac_invemntory scraping function
+#call frac_inventory scraping function
 #scrape_frac_inventory('frac_inventory.csv')
 
 def scrape_rollaway_inventory(outfile,path=path_3):
@@ -866,88 +866,70 @@ def scrape_rollaway_inventory(outfile,path=path_3):
     roll_pages='300-302'
 
     roll_df = tabula.read_pdf(path,pages=roll_pages,area =[[53.1675, 49.725, 738.6075, 554.625]],stream=True,multiple_tables=True)
-    print(len(roll_df))
+    #print(len(roll_df)) #used for original processing
+
     non_null_index = 0
     null_count = 0
 
-    for table in roll_df[0:1]:
-        pd.set_option('display.max_columns',None)
-        #print(table.head(50))
+    #concatenate tables 1 and 2
+    table = pd.concat([roll_df[0],roll_df[1]],ignore_index=True)
 
-        #need to group by -- if a cell is null, the rows directly above and below it
-        for index, row in table.iterrows():
-            if pd.isnull(row['No.']):
-                null_count+=1
-                if null_count == 1:
-                    non_null_index = index
-                elif null_count == 2:
-                    non_null_index = index-2
+    #process table 3
+    table_2 = roll_df[2]
 
-                    null_count = 0
-            else:
-                if null_count >0:
-                    non_null_index = index-1
-                else:
-                    non_null_index=index
+    #remove rows 69-76 (n=8) because data scraped here is actually from outside of the table in question
+    table_2.drop(table_2.tail(8).index,inplace=True)
 
-            table.loc[index, 'non_null_index'] = non_null_index
+    #split first column into two
+    table_2[['No.','Container ID']] = table_2['No. Container ID'].str.split(expand=True)
+    table_2.drop(columns=['No. Container ID'],inplace=True)
 
-        def clean_column(old_name,new_name,table=table):
-            table[old_name] = table[old_name].fillna('').astype(str)
-            new_column = table['non_null_index',old_name].groupby(['non_null_index'])[old_name].apply(' '.join).reset_index().rename(columns={old_name:new_name})
-            new_column[new_name]=new_column[new_name].str.strip()
-            #table = table.merge(new_name, on='non_null_index')
+    #rename 'Waste Description' to 'Waste Description Notes' to match other tables
+    table_2 = table_2.rename(columns={'Waste Description':'Waste Description Notes'})
 
-        clean_column('Container ID','Container_ID')
+    #concatenate all 3 tables together
+    table = pd.concat([table,table_2],ignore_index=True)
 
-        #table['Container ID'] = table['Container ID'].fillna('').astype(str)
-        table['Staging Site'] = table['Staging Site'].fillna('').astype('str')
-        table['Waste Profile Name'] = table['Waste Profile Name'].fillna('').astype('str')
-        table['Waste Description Notes'] = table['Waste Description Notes'].fillna('').astype('str')
-
-        #cont_id = table[['non_null_index', 'Container ID']].groupby(['non_null_index'])['Container ID'].apply(' '.join).reset_index().rename(columns={'Container ID': 'Container_ID'})
-        #cont_id['Container_ID'] = cont_id['Container_ID'].str.strip()
-
-        staging = table[['non_null_index','Staging Site']].groupby(['non_null_index'])['Staging Site'].apply(' '.join).reset_index().rename(columns={'Staging Site': 'Staging_Site'})
-        staging['Staging_Site'] = staging['Staging_Site'].str.strip()
-
-        waste_profile = table[['non_null_index','Waste Profile Name']].groupby(['non_null_index'])['Waste Profile Name'].apply(' '.join).reset_index().rename(columns={'Waste Profile Name': 'Waste_Profile'})
-        waste_profile['Waste_Profile'] = waste_profile['Waste_Profile'].str.strip()
-
-        description = table[['non_null_index','Waste Description Notes']].groupby(['non_null_index'])['Waste Description Notes'].apply(' '.join).reset_index().rename(columns={'Waste Description Notes': 'Description_Notes'})
-        description['Description_Notes']=description['Description_Notes'].str.strip()
-
-        #table = table.merge(cont_id,on='non_null_index')
-        table = table.merge(staging,on='non_null_index')
-        table = table.merge(waste_profile,on='non_null_index')
-        table = table.merge(description,on='non_null_index')
-
-        table = table.drop(columns=['No.','Container ID','Staging Site','Status','Waste Profile Name','Waste Description Notes','Unnamed: 0','Last Date Inspected']).drop_duplicates()
-
-        print(table)
-
-
-    """
-        #create column and set to current index
-        #table.loc
-        #for each row:
-        for index, row in table.iterrows():
-            if pd.notna(row['No.']):
+    #number rows so that if a cell is null, it is grouped with the rows directly above and below it
+    for index, row in table.iterrows():
+        if pd.isnull(row['No.']):
+            null_count+=1
+            if null_count == 1:
                 non_null_index = index
-            #add current non_null_index value to dataframe
-            table.loc[index, 'non_null_index'] = non_null_index
+            elif null_count == 2:
+                non_null_index = index-2
 
-                
-            #print(row['No.'],pd.notna(row['No.']),non_null_index)
-            #save index of most recent non-null row
-            #if value in column 'No.' is null, combine non null values in all cells with previous row's values.
-        pd.set_option('display.max_columns',None)
-        print(table.head(20))
+                null_count = 0
+        else:
+            if null_count >0:
+                non_null_index = index-1
+            else:
+                non_null_index=index
 
-        #table = table.groupby('non_null_index').transform(lambda x: ''.join(str(x)) if np.all(pd.notna(x)) else x)
-        #table = table[table['No.'].notna()]
+        table.loc[index, 'non_null_index'] = non_null_index
 
+    #merge relevant columns of numbered rows back together using the non_null_index generated above
+    def clean_column(old_name,new_name,table):
+        table[old_name] = table[old_name].fillna('').astype('str')
+        new_column = table[['non_null_index',old_name]].groupby(['non_null_index'])[old_name].apply(' '.join).reset_index().rename(columns={old_name:new_name})
+        new_column[new_name]=new_column[new_name].str.strip()
+        table = table.merge(new_column, on='non_null_index')
+        #print(table)
+        return table
+    
+    #call clean_column() for relevant column information
+    table = clean_column('Container ID','Container_ID',table)
+    table = clean_column('Staging Site','Staging_Site',table)
+    table = clean_column('Waste Profile Name', 'Waste_Profile',table)
+    table = clean_column('Waste Description Notes','Description_Notes',table)
 
-        #print(table.head(5))
-    """
-scrape_rollaway_inventory('test.csv')
+    #remove information not cleaned up
+    table = table.drop(columns=['No.','Container ID','Staging Site','Status','Waste Profile Name','Waste Description Notes','Unnamed: 0','Last Date Inspected','Notes','Waste Description']).drop_duplicates()
+
+    #rename index column for this table
+    table = table.rename(columns={'non_null_index':'Roll_Index'})
+
+    table.to_csv(outfile, index=False)
+
+#call scraping function for rollaway inventory
+#scrape_rollaway_inventory('roll_inventory.csv')
