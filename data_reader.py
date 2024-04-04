@@ -908,7 +908,8 @@ def scrape_rollaway_inventory(outfile,path=path_3):
 
         table.loc[index, 'non_null_index'] = non_null_index
 
-    #merge relevant columns of numbered rows back together using the non_null_index generated above
+    #merge relevant rows of values in column old_name back together using the non_null_index generated above
+    #place merged value into column new_name for all rows with same non_null_index
     def clean_column(old_name,new_name,table):
         table[old_name] = table[old_name].fillna('').astype('str')
         new_column = table[['non_null_index',old_name]].groupby(['non_null_index'])[old_name].apply(' '.join).reset_index().rename(columns={old_name:new_name})
@@ -929,6 +930,7 @@ def scrape_rollaway_inventory(outfile,path=path_3):
     #rename index column for this table
     table = table.rename(columns={'non_null_index':'Roll_Index'})
 
+    #write to csv file (note: destination file is passed into the function)
     table.to_csv(outfile, index=False)
 
 #call scraping function for rollaway inventory
