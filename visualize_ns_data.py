@@ -1,7 +1,7 @@
 import pandas as pd
 from itertools import islice
 
-df = pd.read_csv('norfolk_southern_data_3.csv')
+df = pd.read_csv('norfolk_southern_data.csv')
 
 print(df.head(10))
 print(df.shape)
